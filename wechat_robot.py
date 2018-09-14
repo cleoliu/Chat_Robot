@@ -1,6 +1,3 @@
-'''
-https://zhuanlan.zhihu.com/p/39017252
-'''
 #!/usr/bin/python
 #coding=utf8
 import itchat
