@@ -1,3 +1,6 @@
+# Requirements
+* windows
+* python 3.6
 
 # Chat_Robot
 > Support for translation and word reply
