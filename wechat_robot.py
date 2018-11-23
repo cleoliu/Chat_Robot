@@ -1,11 +1,11 @@
 #!/usr/bin/python
-#coding=utf8
+#-*- coding: utf-8 -*-　
 import itchat
 import time
 import requests
 import json
 from translate import translator
-
+from shop import shop_find
 
 
 def post_tulin_robot(text): #-- POST --#
@@ -14,6 +14,8 @@ def post_tulin_robot(text): #-- POST --#
         translate_word = text.replace('翻譯', '')
         translate_reuslt = translator(translate_word)
         return translate_reuslt
+    if "淘♂寳" in text:
+        shop_find(text)
     else :  # 其他訊息則post圖靈回應
         url = 'http://www.tuling123.com/openapi/api'
         data = {
@@ -33,6 +35,6 @@ def text_reply(msg):    #-- 接收wechat用戶發來的訊息(排除自己發的
 
 
 if __name__ == '__main__':
-    itchat.auto_login(enableCmdQR=2)  # Login QRcode
+    itchat.auto_login(enableCmdQR=2)# Login QRcode
     #itchat.send('測試發送內容', toUserName='filehelper')
     itchat.run(debug=True)    
