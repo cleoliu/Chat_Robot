@@ -33,6 +33,6 @@ def text_reply(msg):    #-- 接收wechat用戶發來的訊息(排除自己發的
 
 
 if __name__ == '__main__':
-    itchat.auto_login()  # Login QRcode
+    itchat.auto_login(enableCmdQR=True)  # Login QRcode
     #itchat.send('測試發送內容', toUserName='filehelper')
     itchat.run(debug=True)    
