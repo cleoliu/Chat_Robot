@@ -1,3 +1,6 @@
+'''
+關於excel的操作
+'''
 import os
 import xlwt
 import xlrd
@@ -19,7 +22,7 @@ def new_file(file_name):    #--新增檔案--
     # save
     wb.save(file_name)
 
-def existed_file(file_name, NewUrl, Item, Price, Option, Image):    #--open existed xls file--
+def existed_file(file_name, url, Title, Price, Options, Image):    #--open existed xls file--
     # open
     oldWb = xlrd.open_workbook(file_name, formatting_info=True)
     # sheet index
@@ -29,10 +32,10 @@ def existed_file(file_name, NewUrl, Item, Price, Option, Image):    #--open exis
     newWs = newWb.get_sheet(0)
     # inser 1 row new data
     inserRowNo = 1
-    newWs.write(inserRowNo, 0, NewUrl)
-    newWs.write(inserRowNo, 1, Item)
+    newWs.write(inserRowNo, 0, url)
+    newWs.write(inserRowNo, 1, Title)
     newWs.write(inserRowNo, 2, Price)
-    newWs.write(inserRowNo, 3, ', '.join(Option))
+    newWs.write(inserRowNo, 3, ', '.join(Options))
     for i in range(0, len(Image)):
         newWs.write(inserRowNo, 4+i, Image[i])
     # write old detail
@@ -43,12 +46,12 @@ def existed_file(file_name, NewUrl, Item, Price, Option, Image):    #--open exis
     newWb.save(file_name)
     print ("save with same name ok")
 
-def Inser_file(file_name, NewUrl, Item, Price, Option, Image):
+def Inser_file(file_name, url, Title, Price, Options, Image):
     if os.path.isfile(file_name): # 檔案存在
         pass
     else:                         # 檔案不存在
         new_file(file_name)
-    existed_file(file_name, NewUrl, Item, Price, Option, Image)
+    existed_file(file_name, url, Title, Price, Options, Image)
 
 def Dele_file(file_name):    #--刪除檔案--
     try:
