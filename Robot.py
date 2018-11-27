@@ -32,7 +32,7 @@ def auto_reply(msg):
 
 
 if __name__ == '__main__':
-    itchat.auto_login(hotReload=True) #--Login QRcode-- (enableCmdQR=1) 
+    itchat.auto_login(enableCmdQR=1, hotReload=True) #--Login QRcode-- (enableCmdQR=1) 
     #itchat.send('測試發送內容', toUserName='filehelper')
     itchat.run(debug=True)
 
