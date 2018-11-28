@@ -25,7 +25,7 @@ def En_Trans_Ch(word): #--英中互轉--#
     if response.status_code == 200: #success
         return response.text
     else:
-        print("有道詞典調用失敗") #failure
+        print('有道詞典調用失敗') #failure
         return None
 
 def Zhcn_Trans_Zhtw(word): #--簡轉繁--#

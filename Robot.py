@@ -4,11 +4,15 @@ from fun import features
 
 
 def Job(text): #-- POST --#
-    if "翻譯" in text:
+    if '翻譯' in text:
         response = features.Trans(text)
-    if "淘♂寳" in text:
+    elif '淘♂寳' in text:
         response = features.Shop(text)
-    if "匯率" in text:
+    elif '刪除' in text:
+        response = features.DeleFile(text)
+    elif '回傳' in text:
+        response = features.SendFile(text.replace('回傳', ''))
+    elif '匯率' in text:
         response = features.Rate(text)
     else :
         response = features.Tuling(text)
@@ -23,7 +27,7 @@ def auto_reply(msg):
     readFriend=itchat.search_friends(name='Cleo')
     readFriendsName=readFriend[0]['UserName']
     # friend say
-    print("message：%s" %msg['Text'])
+    print('message：%s' %msg['Text'])
     # Job
     reply = Job(msg['Text'])
     # reply

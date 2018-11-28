@@ -2,8 +2,8 @@ import requests
 import itchat
 from fun.translate import Translator
 from fun.shop import Page
-from fun.workbook import Inser_file, Dele_file
-
+from fun.workbook import Inser_file, Dele_file, Up_file
+import os
 
 def Trans(text):        #--英中翻譯--
     # 排除字眼
@@ -14,23 +14,34 @@ def Trans(text):        #--英中翻譯--
     return translate_reuslt
 
 def Shop(text):         #--商品爬蟲--
+    itchat.send('處理中...')
     # get short url
-    head = text.find("https://")
+    head = text.find('https://')
     short_url = text[head:head+25]
     # crawler
     url, Title, Price, Options, Image = Page(object).Get_platform(short_url)
     # write excel
     Inser_file('product.xls', url, Title, Price, Options, Image)
+    Up_file('upload.xls', Title, Price, Options)
     # whchat reply file
     SendFile('product.xls')
+    SendFile('upload.xls')
 
-    return ("已建檔完成：%s" %Title)
+    return ('Creat：%s' %Title)
 
 def SendFile(filename):         #--回傳檔案--
-    itchat.send_file(filename)
+    if os.path.isfile(filename) == False: # 檔案不存在
+        return ('%s：檔案不存在' %filename)
+    else:
+        return itchat.send_file(filename)
 
 def DeleFile(text):     #--刪除檔案--
-    Dele_file(text)
+    filename = text.replace('刪除', '')
+    if os.path.isfile(filename) == False: # 檔案不存在
+        return ('%s：檔案不存在' %filename)
+    else:
+        Dele_file(filename)
+        return ('Delete file done：%s' %filename)
 
 def Rate(text):         #--匯率查詢--
     from fun import rate

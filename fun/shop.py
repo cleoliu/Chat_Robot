@@ -3,6 +3,7 @@ from lxml import etree
 from selenium import webdriver
 from fun.translate import Zhcn_Trans_Zhtw
 
+
 class Page:
     def __init__(self, driver):
         from selenium.webdriver.chrome.options import Options
@@ -30,19 +31,19 @@ class Page:
             break
 
         # 判斷網域
-        if "detail.tmall.com" in self.driver.current_url:
+        if 'detail.tmall.com' in self.driver.current_url:
             from fun.resource import tmall as RES
             Title, Price, Options, Image = Page.crawler(self, RES)
-        elif "item.taobao.com" in self.driver.current_url:
+        elif 'item.taobao.com' in self.driver.current_url:
             from fun.resource import taobao as RES
             Title, Price, Options, Image = Page.crawler(self, RES)
         else:
-            return "網址錯誤"
+            return 'Url not support Crawler!'
 
         return self.driver.current_url, Title, Price, Options, Image
 
     def crawler(self, RES):
-        # 取得網頁原始碼
+        # html sourcecode
         html = self.driver.page_source  
         selector = etree.HTML(html)
 
@@ -60,7 +61,7 @@ class Page:
             Price = selector.xpath(RES.PRICE)[0].text
             #print (Price)
             
-        # 顏色分類,數量
+        # 顏色分類
         Options = []
         J_isku = Page.is_element_exist(self, RES.ISKU)
         if J_isku == True:     #如果有多顏多尺,就爬選項

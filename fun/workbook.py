@@ -6,7 +6,10 @@ import xlwt
 import xlrd
 from xlutils.copy import copy
 
-def new_file(file_name):    #--新增檔案--
+'''
+自用表
+'''
+def new_file(file_name):    #--自用表,新增檔案--
     # new book
     wb = xlwt.Workbook()
     # sheet
@@ -14,15 +17,15 @@ def new_file(file_name):    #--新增檔案--
     # header
     styleBoldRed   = xlwt.easyxf('font: color-index red, bold on')
     headerStyle = styleBoldRed
-    ws.write(0, 0, "網址", headerStyle)
-    ws.write(0, 1, "商品名稱", headerStyle)
-    ws.write(0, 2, "價格", headerStyle)
-    ws.write(0, 3, "選項", headerStyle) #單格存list
-    ws.write(0, 4, "圖片", headerStyle)
+    ws.write(0, 0, '網址', headerStyle)
+    ws.write(0, 1, '商品名稱', headerStyle)
+    ws.write(0, 2, '價格', headerStyle)
+    ws.write(0, 3, '選項', headerStyle) #單格存list
+    ws.write(0, 4, '圖片', headerStyle)
     # save
     wb.save(file_name)
 
-def existed_file(file_name, url, Title, Price, Options, Image):    #--open existed xls file--
+def existed_file(file_name, url, Title, Price, Options, Image):    #--自用表,open existed xls file--
     # open
     oldWb = xlrd.open_workbook(file_name, formatting_info=True)
     # sheet index
@@ -44,9 +47,9 @@ def existed_file(file_name, url, Title, Price, Options, Image):    #--open exist
             newWs.write(rowIndex + 1, colIndex, oldWbS.cell(rowIndex, colIndex).value)
     # save
     newWb.save(file_name)
-    print ("save with same name ok")
+    print ('save with same name ok')
 
-def Inser_file(file_name, url, Title, Price, Options, Image):
+def Inser_file(file_name, url, Title, Price, Options, Image): #--自用表==
     if os.path.isfile(file_name): # 檔案存在
         pass
     else:                         # 檔案不存在
@@ -61,12 +64,55 @@ def Dele_file(file_name):    #--刪除檔案--
     else:
         print("File is deleted successfully")
 
+
+'''
+上傳用
+'''
+def Up_file(file_name, Title, Price, Options):  #--上傳用表--
+    if os.path.isfile(file_name) == False: # 檔案不存在
+        load_name = './fun/Upload_exmple.xlsx'
+    else:
+        load_name = file_name
+
+    style = xlwt.easyxf('font: color-index red, bold on')
+    oldWb = xlrd.open_workbook(load_name)
+    oldWbS = oldWb.sheet_by_index(0)
+    newWb = copy(oldWb)
+    newWs = newWb.get_sheet(0)
+    inserRowNo = 1
+    newWs.write(inserRowNo, 1, Title, style)
+    newWs.write(inserRowNo, 3, Price, style)
+
+    # 選項
+    if len(Options) > 20:
+        newWs.write(1, 8, '選項超過20個', )
+    Opid = list(range(10, 87, 4))
+    for i in range(0, 20):
+        if i >= len(Options):
+            break
+        newWs.write(1, Opid[i], Options[i], style)
+        newWs.write(1, Opid[i]+1, Price, style)
+        newWs.write(1, Opid[i]+2, 20)
+
+    if os.path.isfile(file_name) == True :
+        for rowIndex in range(inserRowNo, oldWbS.nrows):
+            for colIndex in range(oldWbS.ncols):
+                newWs.write(rowIndex + 1, colIndex, oldWbS.cell(rowIndex, colIndex).value)
+
+    newWb.save(file_name)
+
+
 if __name__ == '__main__':
+    Title = 'diy相冊軟毛金屬油漆筆 手帳婚禮高光簽字筆照片黑卡紙塗鴉珠光筆'
+    Price = '19.60'
+    Options = ['广纳毛笔头金属笔【纸盒】12色', '硬头2mm加粗丙烯【15色】高档装']
+
     Inser_file(
-            file_name='product.xls', 
-            NewUrl='https://item.taobao.com/item.htm?ut_sk=1.WbomrgPmfPIDAEIfPlKIWoLg_21380790_1542969294953.TaoPassword-Weixin.1&id=568398343468&sourceType=item&price=19.6-42&suid=FAC11F6E-00BE-4637-A026-43113DA47A26&un=e1f6adf92ca26d12c078635431fc6d24&share_crt_v=1&sp_tk=77+lQXkzdGJrTW9lWHHvv6U=&cpp=1&shareurl=true&spm=a313p.22.w5.990087108870&short_name=h.3mSpjTu&app=chrome', 
-            Item='diy相冊軟毛金屬油漆筆 手帳婚禮高光簽字筆照片黑卡紙塗鴉珠光筆', 
-            Price='19.60', 
-            Option=['广纳毛笔头金属笔【纸盒】12色', '硬头2mm加粗丙烯【15色】高档装'],
-            Image=['https://gd2.alicdn.com/imgextra/i2/2803025789/TB2XKXedWQoBKNjSZJnXXaw9VXa_!!2803025789.jpg_400x400.jpg', 'https://gd4.alicdn.com/imgextra/i4/2803025789/TB2TcKcfiCYBuNkHFCcXXcHtVXa_!!2803025789.jpg_400x400.jpg']
+            file_name = 'product.xls', 
+            url = 'https://item.taobao.com/item.htm?ut_sk=1.WbomrgPmfPIDAEIfPlKIWoLg_21380790_1542969294953.TaoPassword-Weixin.1&id=568398343468&sourceType=item&price=19.6-42&suid=FAC11F6E-00BE-4637-A026-43113DA47A26&un=e1f6adf92ca26d12c078635431fc6d24&share_crt_v=1&sp_tk=77+lQXkzdGJrTW9lWHHvv6U=&cpp=1&shareurl=true&spm=a313p.22.w5.990087108870&short_name=h.3mSpjTu&app=chrome', 
+            Title = Title,
+            Price = Price, 
+            Options = Options,
+            Image = ['https://gd2.alicdn.com/imgextra/i2/2803025789/TB2XKXedWQoBKNjSZJnXXaw9VXa_!!2803025789.jpg_400x400.jpg', 'https://gd4.alicdn.com/imgextra/i4/2803025789/TB2TcKcfiCYBuNkHFCcXXcHtVXa_!!2803025789.jpg_400x400.jpg']
             )
+    Up_file('tt.xls', Price, 199, Options)
