@@ -17,13 +17,13 @@ def new_file(file_name):    #--自用表,新增檔案--
     # header
     styleBoldRed   = xlwt.easyxf('font: color-index red, bold on')
     headerStyle = styleBoldRed
-    ws.write(0, 0, 'Url', headerStyle)
-    ws.write(0, 1, 'Title', headerStyle)
-    ws.write(0, 2, 'Price', headerStyle)
-    ws.write(0, 3, 'Options', headerStyle) #單格存list
-    for i in range (1, 9):
-        ws.write(0, 3+i, 'Image'+str(i), headerStyle)
-    ws.write(0, 13, 'id', headerStyle)
+    ws.write(0, 0, 'id', headerStyle)
+    ws.write(0, 1, 'Url', headerStyle)
+    ws.write(0, 2, 'Title', headerStyle)
+    ws.write(0, 3, 'Price', headerStyle)
+    ws.write(0, 4, 'Options', headerStyle) #單格存list
+    for i in range (1, 10):
+        ws.write(0, 5+i, 'Image'+str(i), headerStyle)
     # save
     wb.save(file_name)
 
@@ -37,12 +37,12 @@ def existed_file(file_name, url, Title, Price, Options, Image):    #--自用表,
     newWs = newWb.get_sheet(0)
     # inser 1 row new data
     inserRowNo = 1
-    newWs.write(inserRowNo, 0, url)
-    newWs.write(inserRowNo, 1, Title)
-    newWs.write(inserRowNo, 2, Price)
-    newWs.write(inserRowNo, 3, ', '.join(Options))
+    newWs.write(inserRowNo, 1, url)
+    newWs.write(inserRowNo, 2, Title)
+    newWs.write(inserRowNo, 3, Price)
+    newWs.write(inserRowNo, 4, ', '.join(Options))
     for i in range(0, len(Image)):
-        newWs.write(inserRowNo, 4+i, Image[i])
+        newWs.write(inserRowNo, 5+i, Image[i])
     # write old detail
     for rowIndex in range(inserRowNo, oldWbS.nrows):
         for colIndex in range(oldWbS.ncols):
@@ -96,7 +96,7 @@ def Up_file(file_name, Title, Price, Options, Image):  #--上傳用表--
         newWs.write(1, Opid[i]+1, Price, style)
         newWs.write(1, Opid[i]+2, 20)
 
-    for im in range(1, 9):
+    for im in range(1, 10):
         newWs.write(1, 88+im, Image[im], style)
 
     if os.path.isfile(file_name) == True :
