@@ -23,7 +23,7 @@ def new_file(file_name):    #--自用表,新增檔案--
     ws.write(0, 3, 'Price', headerStyle)
     ws.write(0, 4, 'Options', headerStyle) #單格存list
     for i in range (1, 10):
-        ws.write(0, 5+i, 'Image'+str(i), headerStyle)
+        ws.write(0, 4+i, 'Image'+str(i), headerStyle)
     # save
     wb.save(file_name)
 
@@ -42,7 +42,7 @@ def existed_file(file_name, url, Title, Price, Options, Image):    #--自用表,
     newWs.write(inserRowNo, 3, Price)
     newWs.write(inserRowNo, 4, ', '.join(Options))
     for i in range(0, len(Image)):
-        newWs.write(inserRowNo, 4+i, Image[i])
+        newWs.write(inserRowNo, 5+i, Image[i])
     # write old detail
     for rowIndex in range(inserRowNo, oldWbS.nrows):
         for colIndex in range(oldWbS.ncols):
