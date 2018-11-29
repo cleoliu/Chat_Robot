@@ -95,8 +95,11 @@ def Up_file(file_name, Title, Price, Options, Image):  #--上傳用表--
         newWs.write(1, Opid[i], Options[i], style)
         newWs.write(1, Opid[i]+1, Price, style)
         newWs.write(1, Opid[i]+2, 20)
-
+        
+    # 圖片
     for im in range(1, 10):
+        if im >= len(Image):
+            break
         newWs.write(1, 88+im, Image[im], style)
 
     if os.path.isfile(file_name) == True :
