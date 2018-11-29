@@ -22,7 +22,7 @@ def Shop(text):         #--商品爬蟲--
     url, Title, Price, Options, Image = Page(object).Get_platform(short_url)
     # write excel
     Inser_file('product.xls', url, Title, Price, Options, Image)
-    Up_file('upload.xls', Title, Price, Options)
+    Up_file('upload.xls', Title, Price, Options, Image)
     # whchat reply file
     SendFile('product.xls')
     SendFile('upload.xls')

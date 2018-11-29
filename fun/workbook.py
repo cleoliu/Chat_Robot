@@ -17,11 +17,13 @@ def new_file(file_name):    #--自用表,新增檔案--
     # header
     styleBoldRed   = xlwt.easyxf('font: color-index red, bold on')
     headerStyle = styleBoldRed
-    ws.write(0, 0, '網址', headerStyle)
-    ws.write(0, 1, '商品名稱', headerStyle)
-    ws.write(0, 2, '價格', headerStyle)
-    ws.write(0, 3, '選項', headerStyle) #單格存list
-    ws.write(0, 4, '圖片', headerStyle)
+    ws.write(0, 0, 'Url', headerStyle)
+    ws.write(0, 1, 'Title', headerStyle)
+    ws.write(0, 2, 'Price', headerStyle)
+    ws.write(0, 3, 'Options', headerStyle) #單格存list
+    for i in range (1, 9):
+        ws.write(0, 3+i, 'Image'+str(i), headerStyle)
+    ws.write(0, 13, 'id', headerStyle)
     # save
     wb.save(file_name)
 
@@ -68,7 +70,7 @@ def Dele_file(file_name):    #--刪除檔案--
 '''
 上傳用
 '''
-def Up_file(file_name, Title, Price, Options):  #--上傳用表--
+def Up_file(file_name, Title, Price, Options, Image):  #--上傳用表--
     if os.path.isfile(file_name) == False: # 檔案不存在
         load_name = './fun/Upload_exmple.xlsx'
     else:
@@ -94,6 +96,9 @@ def Up_file(file_name, Title, Price, Options):  #--上傳用表--
         newWs.write(1, Opid[i]+1, Price, style)
         newWs.write(1, Opid[i]+2, 20)
 
+    for im in range(1, 9):
+        newWs.write(1, 88+im, Image[im], style)
+
     if os.path.isfile(file_name) == True :
         for rowIndex in range(inserRowNo, oldWbS.nrows):
             for colIndex in range(oldWbS.ncols):
@@ -115,4 +120,4 @@ if __name__ == '__main__':
             Options = Options,
             Image = ['https://gd2.alicdn.com/imgextra/i2/2803025789/TB2XKXedWQoBKNjSZJnXXaw9VXa_!!2803025789.jpg_400x400.jpg', 'https://gd4.alicdn.com/imgextra/i4/2803025789/TB2TcKcfiCYBuNkHFCcXXcHtVXa_!!2803025789.jpg_400x400.jpg']
             )
-    Up_file('tt.xls', Price, 199, Options)
+    Up_file('tt.xls', Price, 199, Options, Image)
