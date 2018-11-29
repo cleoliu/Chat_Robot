@@ -42,7 +42,7 @@ def existed_file(file_name, url, Title, Price, Options, Image):    #--自用表,
     newWs.write(inserRowNo, 3, Price)
     newWs.write(inserRowNo, 4, ', '.join(Options))
     for i in range(0, len(Image)):
-        newWs.write(inserRowNo, 5+i, Image[i])
+        newWs.write(inserRowNo, 4+i, Image[i])
     # write old detail
     for rowIndex in range(inserRowNo, oldWbS.nrows):
         for colIndex in range(oldWbS.ncols):
