@@ -39,12 +39,12 @@ def existed_file(file_name, url, Title, Price, Options, Image):    #--自用表,
     newWs = newWb.get_sheet(0)
 
     # **inser new data**
-    newWs.write(inserRowNo, 0, url)                 #網址
-    newWs.write(inserRowNo, 1, Title)               #品名
-    newWs.write(inserRowNo, 2, Price)               #價格
-    newWs.write(inserRowNo, 3, ', '.join(Options))  #選項
+    newWs.write(inserRowNo, 1, url)                 #網址
+    newWs.write(inserRowNo, 2, Title)               #品名
+    newWs.write(inserRowNo, 3, Price)               #價格
+    newWs.write(inserRowNo, 4, ', '.join(Options))  #選項
     for i in range(0, len(Image)):                  #圖片
-        newWs.write(inserRowNo, 4+i, Image[i])
+        newWs.write(inserRowNo, 5+i, Image[i])
 
     # save
     newWb.save(file_name)
