@@ -78,10 +78,7 @@ class Page:
             if len(li.xpath(RES.IMAGE_SUB)) < 1:
                 continue
             small_pic = li.xpath(RES.IMAGE_SUB)[0]
-            if '50x50' in small_pic:
-                common_pic = 'https:' + small_pic.replace('50x50', '400x400')   #替換圖片50*50至400*400
-            elif '60x60' in small_pic:
-                common_pic = 'https:' + small_pic.replace('60x60', '400x400')
+            common_pic = 'https:' + small_pic.replace(RES.IMG_SIZE, '400x400')   #替換圖片50*50至400*400
             Image.append(common_pic)
         #print (Image)
 

@@ -1,26 +1,76 @@
 # Wechat ItChat
 ItChat is an open source api for WeChat, a commonly-used Chinese social networking app.
 
+**目前功能：**
+- 翻譯
+- 匯率查詢
+- 圖靈回覆
+- 商品爬蟲
+
 # Requirements
-* windows
-* python 3.6
-* ItChat
-```pip install itchat```
+* python 3
 
-# Chat_Robot
-> Support for translation and word reply
-* wechat_robot.py：
-	* run wechat robot server
-	* 自動生成一個二維碼, 掃碼登入
-	* text_reply()：自動回覆 fuction
-	* post_tulin_robot()：call 圖靈 api
-* translate .py：call translate  api
-* server 24小時運行
-```screen  python3  auto_wechat.py  $```
+***
 
-# Screenshots
-![enter image description here](https://github.com/cleoliu/Chat_Robot/blob/master/Screenshot.png?raw=true)
-# ref
-[ItChat github](https://github.com/littlecodersh/ItChat/blob/master/README.md)
+### ItChat
+```
+$ pip install itchat
+```
 
- 
+### 簡繁翻譯
+
+```
+$ pip install zhconv
+```
+
+### crawler
+
+```
+$ pip install requests
+```
+
+- selenium
+
+```
+$ pip install selenium
+```
+
+- chromedriver
+
+```
+$ wget https://chromedriver.storage.googleapis.com/2.41/chromedriver_linux64.zip
+$ sudo apt install unzip
+$ unzip chromedriver_linux64.zip
+$ sudo mv chromedriver /usr/bin/chromedriver
+$ sudo chown root:root /usr/bin/chromedriver
+$ sudo chmod +x /usr/bin/chromedriver
+$ chromedriver #安裝成功檢查
+```
+
+- chromium
+
+```
+$ sudo apt-get update
+$ sudo apt-get install chromium-browser
+```
+
+
+
+### excel
+
+```
+$ pip install xlwt
+$ pip install xlrd
+$ pip install lxml
+$ pip install xlutils
+$ pip install pandas
+```
+
+***
+
+# EXE
+
+```
+$ cd Chat_Robot
+$ python Robot.py
+```
