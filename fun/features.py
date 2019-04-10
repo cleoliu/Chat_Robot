@@ -21,6 +21,8 @@ def Shop(text):         #--商品爬蟲--
     # crawler
     url, Title, Price, Options, Image = Page(object).Get_platform(short_url)
     # write excel
+    if text[2:] == '00':
+        Title = '◍二手◍' + Title
     Inser_file('product.xls', url, Title, Price, Options, Image)
     Up_file('upload.xls', Title, Price, Options, Image)
     # whchat reply file
