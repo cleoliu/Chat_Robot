@@ -6,7 +6,7 @@ from fun import features
 def Job(text): #-- POST --#
     if '翻譯' in text:
         response = features.Trans(text)
-    elif '淘♂寳' in text:
+    elif 'm.tb.cn' in text:
         response = features.Shop(text)
     elif '刪除' in text:
         response = features.DeleFile(text)
