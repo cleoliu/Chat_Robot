@@ -1,21 +1,30 @@
 #-*- coding: utf-8 -*-　
 import itchat
-from fun import features
+from fun import Controller
+from fun import rate
 
-
-def Job(text): #-- POST --#
+def Job(text): #-- 觸發各種事件 --#
+    # 1.翻譯
     if '翻譯' in text:
-        response = features.Trans(text)
+        response = Controller.Trans(text)
+
+    # 2.商品爬蟲
     elif 'm.tb.cn' in text:
-        response = features.Shop(text)
+        response = Controller.Shop(text)
     elif '刪除' in text:
-        response = features.DeleFile(text)
+        response = Controller.DeleFile(text)
     elif '回傳' in text:
-        response = features.SendFile(text.replace('回傳', ''))
+        response = Controller.SendFile(text.replace('回傳', ''))
+
+    # 3.匯率查詢
     elif '匯率' in text:
-        response = features.Rate(text)
+        response = Controller.Rate(text.upper())
+    elif "".join([country for country in rate.countryList() if country in text.upper()]) in text.upper():
+        response = Controller.ExchangeRate(text.upper())
+    
+    # 4.圖靈回覆
     else :
-        response = features.Tuling(text)
+        response = Controller.Tuling(text)
 
     return response
 
