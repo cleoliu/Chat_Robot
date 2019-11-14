@@ -105,14 +105,14 @@ def Up_file(file_name, Title, Price, Options, Image):  #--上傳用表 [upload.x
         newWs.write(inserRowNo, Opid[ps_variation]+2, 20)
 
     # **圖片** 89~97
-    for ps_img in range(1, 10):
+    for ps_img in range(0, 9):
         if ps_img >= len(Image):
             break
-        newWs.write(inserRowNo, 88+ps_img, Image[ps_img], style)
+        newWs.write(inserRowNo, 89+ps_img, Image[ps_img], style)
 
     # **運送條件** 99~108
-    for channel in range(1, 11):
-        newWs.write(inserRowNo, 98+channel, oldWbS.cell_value(1, 98+channel))
+    for channel in range(0, 10):
+        newWs.write(inserRowNo, 99+channel, oldWbS.cell_value(1, 99+channel))
 
     # save
     newWb.save(file_name)
