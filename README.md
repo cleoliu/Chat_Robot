@@ -31,10 +31,10 @@ $ python Robot.py
 $ pip install itchat
 ```
 
-### 簡繁翻譯
+### 翻譯
 
 ```
-$ pip install zhconv
+$ pip install googletrans==4.0.0-rc1
 ```
 
 ### crawler
